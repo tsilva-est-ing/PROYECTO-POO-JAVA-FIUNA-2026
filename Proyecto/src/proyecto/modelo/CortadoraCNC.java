@@ -12,7 +12,7 @@ public class CortadoraCNC extends Maquina{
     private int rpmCabezal;
     private double areaTrabajo;
 
-    public CortadoraCNC(int rpmCabezal, double areaTrabajo, String idMaquina, String marca, double horasUso, double consumoWatts) {
+    public CortadoraCNC(String idMaquina, String marca, double areaTrabajo, double horasUso, int rpmCabezal, double consumoWatts) {
         super(idMaquina, marca, horasUso, consumoWatts);
         this.rpmCabezal = rpmCabezal;
         this.areaTrabajo = areaTrabajo;

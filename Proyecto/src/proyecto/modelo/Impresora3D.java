@@ -12,7 +12,7 @@ public class Impresora3D extends Maquina{
     private double temperaturaExtrusor;
     private double volumenMaximo;
 
-    public Impresora3D(double temperaturaExtrusor, double volumenMaximo, String idMaquina, String marca, double horasUso, double consumoWatts) {
+    public Impresora3D(String idMaquina, String marca, double temperaturaExtrusor, double volumenMaximo, double horasUso, double consumoWatts) {
         super(idMaquina, marca, horasUso, consumoWatts);
         this.temperaturaExtrusor = temperaturaExtrusor;
         this.volumenMaximo = volumenMaximo;
