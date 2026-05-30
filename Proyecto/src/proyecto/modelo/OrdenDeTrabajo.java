@@ -23,8 +23,10 @@ public class OrdenDeTrabajo {
         this.tiempoEstimado = maquinaAsignada.calcularTiempoEstimado();
     }
 
-    public OrdenDeTrabajo(int contadorOrdenes, Maquina maquinaSeleccionada, Material materialSeleccionado) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public OrdenDeTrabajo(int numeroOrden, Maquina maquinaAsignada, Material materialUsado) {
+        this.numeroOrden = numeroOrden;
+        this.maquinaAsignada = maquinaAsignada;
+        this.materialUsado = materialUsado;
     }
     
     public double calcularCostoTotal(double cantidadMaterialUsado){

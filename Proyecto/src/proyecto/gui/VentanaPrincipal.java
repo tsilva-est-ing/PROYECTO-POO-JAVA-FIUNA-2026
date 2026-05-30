@@ -58,6 +58,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         comboMaquina = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(204, 255, 255));
 
@@ -69,6 +70,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         btnGenerar.addActionListener(this::btnGenerarActionPerformed);
 
         btnGuardar.setText("Guardar en Historial");
+        btnGuardar.addActionListener(this::btnGuardarActionPerformed);
 
         jLabel4.setText("Resumen de la Orden:");
 
@@ -189,12 +191,35 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                             "Stock disponible restante de " + materialSeleccionado.getNombre() + ": " + materialSeleccionado.getCantidadDisponible() + "\n\n" +
                             "Presione el botón 'Guardar en Historial' para registrar esta orden en el archivo .txt.");
         } catch (NumberFormatException e) {
-        //Atrapamos el error nativo si el usuario escribe letras en el campo de cantidad
-            txtPantalla.setText("Error de Validación: Por favor, ingrese un valor numérico válido en el campo de cantidad.");
-        }catch(proyecto.modelo.InventarioInsuficienteException e) {
+            // Atrapamos el error nativo si el usuario escribe letras
+            txtPantalla.setText("Error de Validación: Ingrese un número válido.");
+        } catch(proyecto.modelo.InventarioInsuficienteException e) {
+            // Tu excepción personalizada
             txtPantalla.setText(e.getMessage());
+        } catch (Exception e) {
+            // ¡EL NUEVO ATRAPA-TODO! Si hay un error oculto, lo mostrará aquí.
+            txtPantalla.setText("Error Crítico detectado:\n" + e.toString() + "\nRevisa la consola de NetBeans para más detalles.");
+            e.printStackTrace(); 
         }
     }//GEN-LAST:event_btnGenerarActionPerformed
+
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+        // TODO add your handling code here:
+        if (ordenActual == null) {
+            txtPantalla.setText("Error: No hay ninguna cotización generada para guardar. Primero calcule una orden.");
+        } else {
+            //Llamamos al Gestor de Archivos para guardar los datos en el txt
+            gestor.guardarOrden(ordenActual);
+            //Incrementamos el número de orden
+            contadorOrdenes++;
+            //Leemos todo el archivo para mostrarle el historial acumulado al usuario en pantalla
+            String historialCompleto = gestor.leerHistorial();
+            txtPantalla.setText("¡Orden guardada con éxito en el archivo de texto!\n\n=== HISTORIAL COMPLETO DE ÓRDENES ===\n" + historialCompleto);
+            //Limpiamos la orden actual generar una nueva antes de volver a guardar
+            ordenActual = null;
+            txtCantidad.setText("");
+        }
+    }//GEN-LAST:event_btnGuardarActionPerformed
 
     /**
      * @param args the command line arguments
