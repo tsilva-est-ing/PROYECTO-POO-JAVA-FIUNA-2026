@@ -41,7 +41,7 @@ public class OrdenDeTrabajo {
     public String generarResumen() {
         return "Orden #" + numeroOrden + " | Máquina: " + maquinaAsignada.getMarca() + 
                " | Material: " + materialUsado.getNombre() + 
-               " | Tiempo: " + tiempoEstimado + " min | Costo Total: $" + costoTotal;
+               " | Tiempo: " + maquinaAsignada.calcularTiempoEstimado() + " min | Costo Total: $" + String.format("%.2f", costoTotal);//Para imprimir con 2 decimales
     }
 
     public int getNumeroOrden() {

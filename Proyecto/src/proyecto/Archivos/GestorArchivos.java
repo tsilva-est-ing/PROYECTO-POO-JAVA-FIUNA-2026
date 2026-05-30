@@ -46,4 +46,14 @@ public class GestorArchivos {
         }
         return contenido.toString();
     }
+    //Método para limpiar el historial
+    public void limpiarHistorial() {
+        //Al instanciar FileWriter SIN la palabra "true" al lado del nombre
+        //java sobrescribe el archivo borrando todo lo que tenía antes
+        try (java.io.FileWriter fw = new java.io.FileWriter("historial_ordenes.txt", false)) {
+            fw.write(""); //No escribimos nada para dejarlo en blanco
+        } catch (java.io.IOException e) {
+            System.out.println("Error al limpiar el archivo: " + e.getMessage());
+        }
+    }
 }

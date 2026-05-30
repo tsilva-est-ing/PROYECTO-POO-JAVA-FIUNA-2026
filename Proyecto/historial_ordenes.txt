@@ -1,9 +1,3 @@
 =====================================
-Orden #1 | Máquina: Creality | Material: PLA (Filamento 3D) | Tiempo: 0.0 min | Costo Total: $7.5
-=====================================
-=====================================
-Orden #1 | Máquina: Router Pro | Material: Aluminio (Bloque) | Tiempo: 0.0 min | Costo Total: $3.5
-=====================================
-=====================================
-Orden #2 | Máquina: Router Pro | Material: Aluminio (Bloque) | Tiempo: 0.0 min | Costo Total: $0.7
+Orden #1 | Máquina: Creality | Material: PLA (Filamento 3D) | Tiempo: 525.0 min | Costo Total: $1,60
 =====================================

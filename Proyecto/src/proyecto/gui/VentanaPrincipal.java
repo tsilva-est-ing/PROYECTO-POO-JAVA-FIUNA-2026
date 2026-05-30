@@ -56,6 +56,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         txtCantidad = new javax.swing.JTextField();
         comboMaterial = new javax.swing.JComboBox<>();
         comboMaquina = new javax.swing.JComboBox<>();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -84,6 +85,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         comboMaquina.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
+        jButton1.setText("Limpiar Historial");
+        jButton1.addActionListener(this::jButton1ActionPerformed);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -106,11 +110,14 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                                 .addComponent(btnGenerar)))
                         .addGap(220, 220, 220)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnGuardar)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addComponent(comboMaterial, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(comboMaquina, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txtCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(txtCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(btnGuardar)
+                                .addGap(44, 44, 44)
+                                .addComponent(jButton1))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(242, 242, 242)
                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -136,7 +143,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 .addGap(28, 28, 28)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnGenerar)
-                    .addComponent(btnGuardar))
+                    .addComponent(btnGuardar)
+                    .addComponent(jButton1))
                 .addGap(47, 47, 47)
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(28, 28, 28)
@@ -208,7 +216,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         if (ordenActual == null) {
             txtPantalla.setText("Error: No hay ninguna cotización generada para guardar. Primero calcule una orden.");
         } else {
-            //Llamamos al Gestor de Archivos para guardar los datos en el txt
+            //Llamamos al Gestor de Archivos para guardar los datos en el txt        
             gestor.guardarOrden(ordenActual);
             //Incrementamos el número de orden
             contadorOrdenes++;
@@ -220,6 +228,20 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             txtCantidad.setText("");
         }
     }//GEN-LAST:event_btnGuardarActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        //Borramos el contenido del archivo físico txt
+        gestor.limpiarHistorial(); 
+        //Reiniciamos el número de orden a 1
+        contadorOrdenes = 1;
+        //Limpiamos cualquier orden a medias y la caja de texto
+        ordenActual = null;
+        txtCantidad.setText("");
+        //Actualizamos la pantalla para avisarle al usuario
+        txtPantalla.setText("=== SISTEMA ===\nEl historial de órdenes ha sido eliminado por completo del archivo de texto.\nEl contador de órdenes se ha reiniciado a 1.");
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -251,6 +273,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnGuardar;
     private javax.swing.JComboBox<String> comboMaquina;
     private javax.swing.JComboBox<String> comboMaterial;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
