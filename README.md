@@ -1,4 +1,5 @@
-#Sistema de Gestión de Manufactura 
+  #Sistema de Gestión de Manufactura 
+
 Estimar los costos de manufactura para impresión 3D o mecanizado CNC de forma manual consume bastante tiempo operativo en el taller. 
 
 Para armar una cotización real hay que cruzar varios factores a la vez: 
