@@ -18,9 +18,8 @@ public class Impresora3D extends Maquina{
         this.volumenMaximo = volumenMaximo;
     }
     @Override
-    public double calcularTiempoEstimado() {
-        //Supongamos que tarda 1.5 minutos por cada cm3 de volumen máximo configurado
-        return this.volumenMaximo * 1.5; 
+    public double calcularTiempoEstimado(double cantidad) {
+        return cantidad * 1.5; 
     }
     @Override
     public void registrarMantenimiento() {

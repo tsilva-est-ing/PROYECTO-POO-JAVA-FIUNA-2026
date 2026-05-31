@@ -15,33 +15,33 @@ public class OrdenDeTrabajo {
     private double costoTotal;
     private double tiempoEstimado;
 
-    public OrdenDeTrabajo(int numeroOrden, Maquina maquinaAsignada, Material materialUsado, double costoTotal, double tiempoEstimado) {
-        this.numeroOrden = numeroOrden;
-        this.maquinaAsignada = maquinaAsignada;
-        this.materialUsado = materialUsado;
-        this.costoTotal = costoTotal;
-        this.tiempoEstimado = maquinaAsignada.calcularTiempoEstimado();
-    }
-
+    
+// CORREGIDO: Solo recibe los 3 parámetros que realmente le envías desde la VentanaPrincipal
     public OrdenDeTrabajo(int numeroOrden, Maquina maquinaAsignada, Material materialUsado) {
         this.numeroOrden = numeroOrden;
         this.maquinaAsignada = maquinaAsignada;
         this.materialUsado = materialUsado;
+        
+        // Inicializamos en 0.0, ya que el método calcularCostoTotal() se encargará de actualizarlos
+        this.costoTotal = 0.0;
+        this.tiempoEstimado = 0.0;
     }
     
-    public double calcularCostoTotal(double cantidadMaterialUsado){
-        this.costoTotal = cantidadMaterialUsado*materialUsado.getCostoPorUnidad();
+  public double calcularCostoTotal(double cantidadMaterialUsado){
+        this.costoTotal = cantidadMaterialUsado * materialUsado.getCostoPorUnidad();
+        //Le pasamos la cantidad del usuario a la máquina
+        this.tiempoEstimado = maquinaAsignada.calcularTiempoEstimado(cantidadMaterialUsado);
         //Sumamos un costo fijo por hora de uso de la máquina
-        double horasEstimadas = this.tiempoEstimado/60.0;
-        double costoEnergetico = horasEstimadas*maquinaAsignada.getConsumoWatts()*0.5;//Supongamos $0.5 el watt
-        this.costoTotal += costoEnergetico;
+        double horasEstimadas = this.tiempoEstimado / 60.0;
+        double costoEnergetico = horasEstimadas * maquinaAsignada.getConsumoWatts() * 0.5; // Supongamos $0.5 el watt
+        this.costoTotal += costoEnergetico;     
         return this.costoTotal;
     }
-    
+  
     public String generarResumen() {
         return "Orden #" + numeroOrden + " | Máquina: " + maquinaAsignada.getMarca() + 
                " | Material: " + materialUsado.getNombre() + 
-               " | Tiempo: " + maquinaAsignada.calcularTiempoEstimado() + " min | Costo Total: $" + String.format("%.2f", costoTotal);//Para imprimir con 2 decimales
+               " | Tiempo: " + this.tiempoEstimado + " min | Costo Total: $" + String.format("%.2f", costoTotal);//Para imprimir con 2 decimales
     }
 
     public int getNumeroOrden() {

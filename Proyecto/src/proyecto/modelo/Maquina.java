@@ -53,6 +53,6 @@ public abstract class Maquina implements Mantenible {
         this.consumoWatts = consumoWatts;
     }
     
-    public abstract double calcularTiempoEstimado();
+    public abstract double calcularTiempoEstimado(double cantidad);
     
 }

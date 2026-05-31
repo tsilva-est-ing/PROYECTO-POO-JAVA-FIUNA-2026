@@ -18,13 +18,10 @@ public class CortadoraCNC extends Maquina{
         this.areaTrabajo = areaTrabajo;
     }
    
-    @Override
-    public double calcularTiempoEstimado() {
-        //Depende del área a desbastar y las RPM del motor
-        //A más RPM, menos tiempo tarda.
-        return (this.areaTrabajo * 100) / this.rpmCabezal; 
+   @Override
+    public double calcularTiempoEstimado(double cantidad) {
+        return (cantidad * 100) / this.rpmCabezal; 
     }
-
     @Override
     public void registrarMantenimiento() {
         System.out.println("Mantenimiento de CNC: Afilado de fresa, revisión de motor de husillo y recolección de viruta.");
